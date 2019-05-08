@@ -3,6 +3,7 @@ import withAuth from './withAuth';
 import API from '../utils/API';
 import { Link } from 'react-router-dom';
 import Jobs from './Jobs/Jobs'
+import Clocks from './Clocks/Clocks'
 
 class Profile extends Component {
 
@@ -45,6 +46,7 @@ class Profile extends Component {
         <p>Email: {this.state.email}</p> */}
         <Link to="/">Go home</Link>
         <Jobs />
+        <Clocks />
       </div>
     )
   }

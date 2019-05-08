@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 
-
-
-
-
 class Jobs extends Component {
-    handleJobPost = e => {
-        // const job = this.ref.Progress1
-        e.preventDefault();
-        console.log("job");
+    constructor(props) {
+        super(props);
+        this.state = { value: '' };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({ value: event.target.value });
+    }
+
+    handleSubmit(event) {
+        alert('A new job has been added! ' + this.state.value);
+        event.preventDefault();
     }
 
     render() {
@@ -27,24 +34,19 @@ class Jobs extends Component {
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form onSubmit={this.handleJobPost} ref="Progress1">
-                                    <div className="form-group">
-                                        <label htmlFor="jobname">Job name:</label>
-                                        <input className="form-control"
-                                            placeholder="Job name goes here..."
-                                            name="jobname"
-                                            type="text"
-                                            id="jobname"
-                                            onChange={this.handleChange} />
-                                    </div>
-                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                <form onSubmit={this.handleSubmit}>
+                                    <label>
+                                        Job name:
+                                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                                    </label>
+                                    <input type="submit" value="Submit" />
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
