@@ -37,7 +37,7 @@ class Profile extends Component {
       styles.color = "blue"
     } else {
       timeOfDay = "night";
-      styles.color = "yellow"
+      styles.color = "purple"
     }
     return (
       <div className="container Profile">

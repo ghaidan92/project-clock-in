@@ -11,7 +11,7 @@ class Clocks extends Component {
             hours: 0,
             minutes: 0,
             seconds: 0,
-            logTime: [],
+            logTimes: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -48,6 +48,22 @@ class Clocks extends Component {
         clearInterval(this.timer)
     }
 
+    handleTimerReset(e){
+        e.preventDefault();
+
+        this.setState({seconds: 0, minutes: 0, hours: 0, timerStarted: false, timerStopped: true});
+        clearInterval(this.timer);
+    }
+
+    handleTimerLogTime(e){
+        this.setState(prevState => ({ 
+            logTimes: [
+                ...prevState.logTimes, 
+                this.state.hours + ":" + this.state.minutes + ":" + this.state.seconds
+            ] 
+        }))
+    }
+
     render() {
         return (
             <div>
@@ -57,6 +73,11 @@ class Clocks extends Component {
                         <h6 className="card-subtitle mb-2 text-muted">Ready to clock in?</h6>
                         <p className="card-text">You have worked (time) so far!</p>
                         <div className="container">
+                            <div className="timer-logTimes">
+                                { this.state.logTimes.map((time, index)=> {
+                                    return <code>{"Log " + (index + 1) + ": " + time}</code>
+                                })}
+                            </div>
                             <div className="timer-container">
                                 <div className="current-timer">
                                     {this.state.hours + ":" + this.state.minutes + ":" + this.state.seconds}
@@ -64,8 +85,8 @@ class Clocks extends Component {
                                 <div className="timer-controls">
                                     <button className="btn btn-success" onClick={this.handleTimerStart.bind(this)}>Start</button>
                                     <button className="btn btn-secondary" onClick={this.handleTimerStop.bind(this)}>Stop</button>
-                                    <button className="btn btn-info">Log Time</button>
-                                    <button className="btn btn-danger">Reset</button>
+                                    <button className="btn btn-info" onClick={this.handleTimerLogTime.bind(this)}>Log Time</button>
+                                    <button className="btn btn-danger" onClick={this.handleTimerReset.bind(this)}>Reset</button>
                                 </div>
                             </div>
                         </div>
